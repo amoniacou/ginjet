@@ -6,6 +6,8 @@ import (
 	"net/http"
 )
 
+var htmlContentType = []string{"text/html; charset=utf-8"}
+
 // JetRender is a custom Gin template renderer using Jet
 type JetRender struct {
 	Options  *RenderOptions
@@ -50,4 +52,11 @@ func (r JetRender) Render(w http.ResponseWriter) error {
 		return err
 	}
 	return nil
+}
+
+func (r JetRender) WriteContentType(w http.ResponseWriter) {
+	header := w.Header()
+	if val := header["Content-Type"]; len(val) == 0 {
+		header["Content-Type"] = htmlContentType
+	}
 }
