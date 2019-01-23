@@ -57,6 +57,6 @@ func (r JetRender) Render(w http.ResponseWriter) error {
 func (r JetRender) WriteContentType(w http.ResponseWriter) {
 	header := w.Header()
 	if val := header["Content-Type"]; len(val) == 0 {
-		header["Content-Type"] = htmlContentType
+		header["Content-Type"] = r.Options.ContentType
 	}
 }
